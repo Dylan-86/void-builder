@@ -110,8 +110,8 @@ jobs:
         with:
           python-version: '3.11'
         if: env.SHOULD_BUILD == 'yes'
-       - name: Disable broken ubuntu-toolchain-r PPA
-         run: sudo add-apt-repository -r ppa:ubuntu-toolchain-r/test
+      - name: Disable broken ubuntu-toolchain-r PPA
+        run: sudo add-apt-repository -r ppa:ubuntu-toolchain-r/test
 
       - name: Install libkrb5-dev
         run: sudo apt-get update -y && sudo apt-get install -y libkrb5-dev
