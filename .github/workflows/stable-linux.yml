@@ -27,10 +27,10 @@ on:
 env:
   ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION: true
   APP_NAME: Void
-  ASSETS_REPOSITORY: ${{ github.repository_owner }}/binaries # VSCodium has this be the current repo, voideditor/void-builder
+ 
   DISABLE_UPDATE: 'yes'
   OS_NAME: linux
-  VERSIONS_REPOSITORY: ${{ github.repository_owner }}/versions
+  
   VSCODE_QUALITY: stable
 
 jobs:
@@ -251,13 +251,7 @@ jobs:
         run: ./release.sh
         if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
 
-      - name: Update versions repo
-        env:
-          FORCE_UPDATE: ${{ github.event.inputs.force_version }}
-          GITHUB_TOKEN: ${{ secrets.STRONGER_GITHUB_TOKEN }}
-          GITHUB_USERNAME: ${{ github.repository_owner }}
-        run: ./update_version.sh
-        if: env.DISABLED != 'yes' && env.SHOULD_BUILD == 'yes' && env.SHOULD_DEPLOY == 'yes'
+
 
       - name: Upload assets
         uses: actions/upload-artifact@v4
@@ -546,7 +540,7 @@ jobs:
 
   #     - uses: svenstaro/upload-release-action@v2
   #       with:
-  #         repo_name: ${{ env.ASSETS_REPOSITORY }}
+  #         
   #         repo_token: ${{ secrets.STRONGER_GITHUB_TOKEN }}
   #         file: ${{ steps.build.outputs.snap }}
   #         tag: ${{ env.RELEASE_VERSION }}
